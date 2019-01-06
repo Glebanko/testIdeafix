@@ -108,9 +108,6 @@ use yii\helpers\Html;
 	</div>
 </div>
 <?}else{?>
-<pre>
-	<?print_r($goods['goods'])?>
-</pre>	
 	<div class="container basket-container">
 	<div class="table-responsive" style="max-width: 100%; overflow: auto;">
 		<table class="table table-bordered">
@@ -238,7 +235,6 @@ use yii\helpers\Html;
 		        </div>
 	      </div>
       <div class="modal-footer">
-      	
       	<button class="btn btn-success">Отправить</button>
       </div>
       <?php 

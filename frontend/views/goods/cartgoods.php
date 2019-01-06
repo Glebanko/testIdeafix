@@ -3,19 +3,10 @@
 	$prices[] = $good['price']['price2'];
 	$prices[] = $good['price']['priceEvro'];
 	$prices[] = $good['price']['priceSem'];
-	$sizes[] = $good['size'][0]['value'];
-	$sizes[] = $good['size'][1]['value'];
-	$sizes[] = $good['size'][2]['value'];
-	$sizes[] = $good['size'][3]['value'];
-	$pricesCartgoods = $prices;
 	$resultPrices = array_shift($prices);
+	$idGoods = $good['id'];
 	//print_r($good);
 ?>
-<pre>
-	<?
-	print_r($good);
-	?>
-</pre>
 <div class="container">
 	<div class="col-md-6">
 		<div>
@@ -38,7 +29,7 @@
 			<h1><?=$good['title']?></h1>
 		</div>
 		<div class="price">
-			<h2>Цена: <?echo $resultPrices;?> грн.</h2>
+			<h2>Цена: <span class="priceCartgoods"><?echo $resultPrices;?></span> грн.</h2>
 		</div>
 		<div class="article">
 			<h4>Артикул: <?=$good['article']['article']?></h4>
@@ -61,11 +52,11 @@
 		</div>
 		<div class="buy-button">
 			<form class="goCartgoods">
-				<button class="buttonBuyCartgoods" data-pricecartgoods="<?print_r($pricesCartgoods);?>" data-sizecartgoods="<?print_r($sizes);?>"><i class="fas fa-cart-plus"></i>Купить</button>
+				<button class="buttonBuyCartgoods" data-idgoods="<?echo $idGoods;?>"><i class="fas fa-cart-plus"></i>Купить</button>
 				<input type="hidden" name="id" value="<?=$good['id']?>">
 				<input type="hidden" name="color" class="cartgoods-color" value="Не указан">
 				<input type="hidden" name="size" class="cartgoods-size" value="Не указан">
-				<input type="hidden" name="price" value="<?echo $resultPrices;?>">
+				<input type="hidden" name="price" class="inputPriceCartGoods" value="<?echo $resultPrices;?>">
 			</form>
 		</div>
 		<div class="description">

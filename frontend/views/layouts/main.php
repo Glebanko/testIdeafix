@@ -253,15 +253,16 @@ AppAsset::register($this);
         return false;
     });
     $(".selectSizes").change(function() {
-        priceCartgoods = $(".buttonBuyCartgoods").data("pricecartgoods");
-        sizeCartgoods = $(".buttonBuyCartgoods").data("sizecartgoods");
+        idGoods = $(".buttonBuyCartgoods").data("idgoods");
         size = $(this).val();
         $.ajax({
             type: "POST",
-            url: "/test",
-            data: ({"size":size,"priceCartgoods":priceCartgoods,"sizeCartgoods":sizeCartgoods}),
+            url: "/cartgoodsprice",
+            data: ({"idGoods":idGoods, "size":size}),
             success: function(html){
                 console.log(html);
+                $(".priceCartgoods").html(html);
+                $(".inputPriceCartGoods").attr('value', html)
             }
         });
     });

@@ -63,9 +63,11 @@ class BasketController extends Controller
 
    public function actionGobasket(){
         $form = new BasketForm();
-        if($form->load(Yii::$app->request->post(),'')&&$form->validate()){
+        $form->load(Yii::$app->request->post());
+        if($form->validate()){
             try{
-                $this->service->create($form,Yii::$app->user->identity->id);
+                $userId = Yii::$app->user->identity->id;
+                $this->service->create($form, $userId);
             }catch (\RuntimeException $e){
                 Yii::error($e);
                 Yii::$app->session->setFlash('error','Корзина не сохраниласьть обратитесь к администратору');

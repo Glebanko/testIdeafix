@@ -79,43 +79,6 @@ class SiteController extends Controller
     public function actionIndex(){
         return $this->render('index');
     }
-    public function actionTest(){
-        $size = $_POST['size'];
-        $sizeCartgoods = $_POST['sizeCartgoods'];
-        $priceCartgoods = $_POST['priceCartgoods'];
-        $numberSize = array_search($size, array_column($sizeCartgoods, "value"));
-        foreach ($priceCartgoods as $price) {
-            if($price == 0 or $price == null){
-                $countPrice++;
-            }
-        }
-        if ($countPrice >= 3) {
-            $priceResult = $priceCartgoods[0];
-        }else{
-            $priceResult = $priceCartgoods[$numberSize];
-        }
-        return $priceResult;
-    }
-    public function actionCartgoods(){
-        if (Yii::$app -> request -> get('id')) {
-            $good = Goods::find()->with(['article', 'image', 'price', 'size', 'color', 'info'])->where(['slug_gods' => Yii::$app -> request -> get('id')]) -> asArray() -> one();
-            return $this -> render('cartgoods', ['good' => $good]);
-        }
-    }
-    public function actionSearchgoods()
-    {
-       if (Yii::$app->request->post()){
-           $namegoods = Yii::$app->request->post('goods');
-           $goods = Goods::find()->with(['article', 'image', 'price', 'size'])->andFilterWhere(['like', 'title', $namegoods])->asArray()->all();
-           return $this->render('searchgoods', ['goods' => $goods, 'namegoods' => $namegoods]);
-       }
-    }
-    public function actionGoods(){
-        if (Yii::$app -> request -> get('id')) {
-            $good = Category::find()->with(['goods.article', 'goods.image', 'goods.price', 'goods.size', 'parent'])->where(['slug_category' => Yii::$app -> request -> get('id')]) -> asArray() -> one();
-            return $this -> render('goods', ['goods' => $good]);
-        }
-    }
     /* Хотел делать фильтр но не получилось */
     /*
     public function actionFilter()
